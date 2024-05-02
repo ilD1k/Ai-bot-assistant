@@ -115,13 +115,7 @@ def voice_gpt(message):
 # handlers_user
 
 
-@bot.message_handler(func=lambda message: message.text == "Голосовое общение🗣")
-def voice_input_message(message):
-    bot.send_message(message.chat.id, 'Запиши голосовое \n'
-                                      'с вопросом.', reply_markup=create_key())
-    bot.register_next_step_handler(message, voice_message_handler_message)
-
-
+@bot.message_handler(content_types=["voice"])
 def voice_message_handler_message(message):
     voice = message.voice.file_id
     user_id = message.chat.id
@@ -168,13 +162,7 @@ def voice_message_handler_message(message):
         bot.send_message(message.chat.id, "Запросы закончились!", reply_markup=create_key())
 
 
-@bot.message_handler(func=lambda message: message.text == "Текстовое общение📝")
-def text_input_message(message):
-    bot.send_message(message.chat.id, 'Напиши текст\n'
-                                      'со вопросом.', reply_markup=create_key())
-    bot.register_next_step_handler(message, text_message_handler_message)
-
-
+@bot.message_handler(content_types=["text"])
 def text_message_handler_message(message):
     text = message.text
     user_id = message.chat.id
