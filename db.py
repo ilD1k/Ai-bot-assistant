@@ -8,7 +8,7 @@ db_file = os.getenv('DB_FILE')
 
 class ConnectionClosure:
     def __init__(self):
-        self.connect = sqlite3.connect(db_file)
+        self.connect = sqlite3.connect("Database.db")
         self.cursor = self.connect.cursor()
 
     def close(self):
